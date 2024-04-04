@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blood Pressure Tracker</title>
+  <style>
+    /* Import Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Aboreto&family=Climate+Crisis&family=Poppins:ital,wght@0,100;0,200;0,300;0,900;1,200;1,800;1,900&display=swap');
+
+    /* Styles for the main container */
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #f7f7f7;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Styles for the header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: 24px;
+      margin: 0;
+    }
+
+    /* Styles for the user info display */
+    #user-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+      margin-bottom: 20px;
+      padding: 20px;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+    }
+    #user-info p {
+      margin: 0;
+    }
+
+    /* Styles for the input form */
+    .input-form {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .input-form input[type="number"] {
+      font-family: "Aboreto", system-ui;
+      font-weight: 400;
+      font-style: normal;
+      font-family: "Arial", sans-serif;
+      font-size: 18px;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    /* Styles for the week title and card */
+    .weekTitle, .card {
+      border-radius: 5px;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+      margin: 10px;
+      text-align: center;
+    }
+    .weekTitle {
+      background-color: #333;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    /* Styles for the week view */
+    .weekView {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 10px;
+    }
+
+    /* Styles for the card and delete button */
+    .card {
+      position: relative;
+      padding: 20px;
+    }
+    .delete {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      color: red;
+    }
+
+    /* Popup dialog styles */
+    .popup-dialog {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #ffcccc;
+      padding: 20px;
+      border-radius: 5px;
+      display: none;
+      z-index:9999
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header section -->
+    <header>
+      <h1>Blood Pressure Tracker</h1>
+      <div>
+        <p>Select User:</p>
+        <svg viewBox="0 0 640 512" width="30" title="user-check">
+  <path d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4zm323-128.4l-27.8-28.1c-4.6-4.7-12.1-4.7-16.8-.1l-104.8 104-45.5-45.8c-4.6-4.7-12.1-4.7-16.8-.1l-28.1 27.9c-4.7 4.6-4.7 12.1-.1 16.8l81.7 82.3c4.6 4.7 12.1 4.7 16.8.1l141.3-140.2c4.6-4.7 4.7-12.2.1-16.8z" />
+</svg>
+        <select id="userSelection">
+          <!-- Populate the options dynamically based on available users -->
+        </select>
+      </div>
+      <button id="addReading"><svg viewBox="0 0 496 512" width="12" title="user-circle">
+  <path d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z" />
+</svg>Add user</button>
+    </header>
+
+    <!-- User info display -->
+    <div id="user-info">
+      <p id="user-name">Name: -</p>
+      <p id="user-phone">Phone: -</p>
+      <p id="doctor-name">Doctor: -</p>
+      <p id="doctor-phone">Doctor's Phone: -</p>
+    </div>
+
+    <!-- User info dialog form -->
+    <div id="userInfoDialog" style="display: none;">
+      <h2>Enter User Info</h2>
+      <input type="text" id="name" placeholder="Name">
+      <input type="tel" id="phone" placeholder="Phone Number">
+      <input type="text" id="drName" placeholder="Doctor's Name">
+      <input type="tel" id="drPhone" placeholder="Doctor's Phone">
+      <button id="submitUserInfo">Submit</button>
+    </div>
+
+    <!-- Input form for blood pressure and pulse -->
+    <div class="input-form">
+      <input type="number" id="sys" placeholder="Systolic (sys)">
+      <input type="number" id="dia" placeholder="Diastolic (dia)" style="display: none;">
+      <input type="number" id="pulse" placeholder="Pulse" style="display: none;">
+    </div>
+
+    <!-- Popup dialog for high blood pressure -->
+    <div id="highBPPopup" class="popup-dialog" style="display: none;">
+      <h2>High Blood Pressure Alert!</h2>
+      <p>Please call your doctor immediately.</p>
+      <button id="callDoctor">Call the Doctor</button>
+      <button id="closePopup">Close</button>
+    </div>
+
+    <!-- Dialog box for confirming readings -->
+    <div id="dialog" class="popup-dialog" style="display: none;">
+      <h2>Confirm Reading</h2>
+      <p>Systolic: <span id="sysReading"></span></p>
+      <p>Diastolic: <span id="diaReading"></span></p>
+      <p>Pulse: <span id="pulseReading"></span></p>
+      <button id="confirm">Confirm</button>
+      <button id="edit">Edit</button>
+    </div>
+
+    <!-- Readings history -->
+    <div id="readings-history">
+      <h2>Readings History</h2>
+      <div class="weekView"></div>
+    </div>
+  </div>
+
+  <!-- JavaScript code -->
+  <script>
+    const addReadingButton = document.getElementById('addReading');
+    const userInfoDialog = document.getElementById('userInfoDialog');
+    const nameInput = document.getElementById('name');
+    const phoneInput = document.getElementById('phone');
+    const drNameInput = document.getElementById('drName');
+    const drPhoneInput = document.getElementById('drPhone');
+    const submitUserInfoButton = document.getElementById('submitUserInfo');
+    const sysInput = document.getElementById('sys');
+    const diaInput = document.getElementById('dia');
+    const pulseInput = document.getElementById('pulse');
+    const dialog = document.getElementById('dialog');
+    const confirmButton = document.getElementById('confirm');
+    const editButton = document.getElementById('edit');
+    const highBPPopup = document.getElementById('highBPPopup');
+    const callDoctorButton = document.getElementById('callDoctor');
+    const closePopupButton = document.getElementById('closePopup');
+    const userNameDisplay = document.getElementById('user-name');
+    const userPhoneDisplay = document.getElementById('user-phone');
+    const doctorNameDisplay = document.getElementById('doctor-name');
+    const doctorPhoneDisplay = document.getElementById('doctor-phone');
+    const userSelection = document.getElementById('userSelection');
+
+    // Load user info from local storage
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+    userSelection.innerHTML = users.map(user => `<option value="${user.name}">${user.name}</option>`).join('');
+
+    userSelection.addEventListener('change', () => {
+      const selectedUser = users.find(user => user.name === userSelection.value);
+      userNameDisplay.textContent = `Name: ${selectedUser.name}`;
+      userPhoneDisplay.textContent = `Phone: ${selectedUser.phone}`;
+      doctorNameDisplay.textContent = `Doctor: ${selectedUser.drName}`;
+      doctorPhoneDisplay.textContent = `Doctor's Phone: ${selectedUser.drPhone}`;
+    });
+
+    // Event listener for adding user info
+    submitUserInfoButton.addEventListener('click', () => {
+      const name = nameInput.value.trim();
+      const phone = phoneInput.value.trim();
+      const drName = drNameInput.value.trim();
+      const drPhone = drPhoneInput.value.trim();
+
+      // Save user info to local storage
+      const userInfo = { name, phone, drName, drPhone };
+      users.push(userInfo);
+      localStorage.setItem('users', JSON.stringify(users));
+
+      userSelection.innerHTML = users.map(user => `<option value="${user.name}">${user.name}</option>`).join('');
+
+      // Update user info display
+      userNameDisplay.textContent = `Name: ${name}`;
+      userPhoneDisplay.textContent = `Phone: ${phone}`;
+      doctorNameDisplay.textContent = `Doctor: ${drName}`;
+      doctorPhoneDisplay.textContent = `Doctor's Phone: ${drPhone}`;
+
+      userInfoDialog.style.display = 'none';
+    });
+
+    addReadingButton.addEventListener('click', () => {
+      userInfoDialog.style.display = 'block';
+    });
+
+    sysInput.addEventListener('input', () => {
+      if (sysInput.value.length === 3) {
+        diaInput.style.display = 'block';
+        diaInput.focus();
+      }
+    });
+
+    diaInput.addEventListener('input', () => {
+      if (diaInput.value.length === 2) {
+        pulseInput.style.display = 'block';
+        pulseInput.focus();
+      }
+    });
+
+    pulseInput.addEventListener('input', () => {
+      if (pulseInput.value.length === 2 || pulseInput.value.length === 3) {
+        dialog.style.display = 'grid';
+        sysReading.textContent = sysInput.value;
+        diaReading.textContent = diaInput.value;
+        pulseReading.textContent = pulseInput.value;
+
+        const sysValue = parseInt(sysInput.value);
+        if (sysValue > 140) {
+          highBPPopup.style.display = 'block';
+        }
+      }
+    });
+
+    confirmButton.addEventListener('click', () => {
+      let reading = {
+        sys: sysInput.value,
+        dia: diaInput.value,
+        pulse: pulseInput.value,
+        timestamp: new Date().toLocaleString()
+      };
+
+      let readings = JSON.parse(localStorage.getItem('readings')) || [];
+      readings.push(reading);
+      localStorage.setItem('readings', JSON.stringify(readings));
+
+      displayReadings();
+      dialog.style.display = 'none';
+      sysInput.value = '';
+      diaInput.value = '';
+      pulseInput.value = '';
+      diaInput.style.display = 'none';
+      pulseInput.style.display = 'none';
+      highBPPopup.style.display = 'none';
+    });
+
+    editButton.addEventListener('click', () => {
+      sysInput.value = document.getElementById('sysReading').textContent;
+      diaInput.value = document.getElementById('diaReading').textContent;
+      pulseInput.value = document.getElementById('pulseReading').textContent;
+      dialog.style.display = 'none';
+      diaInput.style.display = 'none';
+      pulseInput.style.display = 'none';
+      sysInput.focus();
+    });
+
+    callDoctorButton.addEventListener('click', () => {
+      // Here you can implement the logic to initiate a call to the doctor using WebRTC or other suitable methods
+      // For demonstration purposes, let's log a message to indicate the call action
+      console.log('Initiating call to the doctor...');
+      // Close the popup after calling the doctor
+      highBPPopup.style.display = 'none';
+    });
+
+    closePopupButton.addEventListener('click', () => {
+      highBPPopup.style.display = 'none';
+    });
+
+    function displayReadings() {
+      const weekView = document.querySelector('.weekView');
+      weekView.innerHTML = '';
+      let readings = JSON.parse(localStorage.getItem('readings')) || [];
+      readings.forEach((reading, index) => {
+        let readingCard = document.createElement('div');
+        readingCard.classList.add('card');
+        readingCard.innerHTML = `
+        <p>Timestamp: <h4>${reading.timestamp}</h4></p>
+          <p>Systolic: ${reading.sys}</p>
+          <p>Diastolic: ${reading.dia}</p>
+          <p>Pulse: ${reading.pulse}</p>
+          
+          <span class="delete" data-index="${index}"><svg viewBox="0 0 448 512" width="10" title="trash-alt">
+  <path d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z" />
+</svg></span>
+        `;
+        weekView.appendChild(readingCard);
+
+        let deleteButton = readingCard.querySelector('.delete');
+        deleteButton.addEventListener('click', () => {
+          readings.splice(index, 1);
+          localStorage.setItem('readings', JSON.stringify(readings));
+          displayReadings();
+        });
+      });
+    }
+
+    displayReadings();
+  </script>
+</body>
+</html>
