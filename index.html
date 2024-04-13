@@ -23,6 +23,20 @@
       background-color: #fff;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
+   body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #f7f7f7;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
     /* Styles for the header */
     header {
@@ -114,6 +128,120 @@
       padding: 20px;
       border-radius: 5px;
       display: none;
+      z-index:9999;
+    }
+
+    /* Dashboard styles */
+    #dashboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+      margin-bottom: 20px;
+      padding: 20px;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+    }
+    #dashboard h2 {
+      grid-column: 1 / -1;
+    }
+    #dashboard p {
+      margin: 0;
+      padding: 4px;
+      background: #e7e7e7;
+      border-radius: 4px;
+    }
+    /* Styles for the header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: 24px;
+      margin: 0;
+    }
+
+    /* Styles for the user info display */
+    #user-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+      margin-bottom: 20px;
+      padding: 20px;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+    }
+    #user-info p {
+      margin: 0;
+    }
+
+    /* Styles for the input form */
+    .input-form {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .input-form input[type="number"] {
+      font-family: "Aboreto", system-ui;
+      font-weight: 400;
+      font-style: normal;
+      font-family: "Arial", sans-serif;
+      font-size: 18px;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    /* Styles for the week title and card */
+    .weekTitle, .card {
+      border-radius: 5px;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+      margin: 10px;
+      text-align: center;
+    }
+    .weekTitle {
+      background-color: #333;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    /* Styles for the week view */
+    .weekView {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 10px;
+    }
+
+    /* Styles for the card and delete button */
+    .card {
+      position: relative;
+      padding: 20px;
+     background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"%3E%3Cg fill-rule="evenodd"%3E%3Cg fill="%239C92AC" fill-opacity="0.4"%3E%3Cpath opacity=".5" d="M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z"/%3E%3Cpath d="M6 5V0H5v5H0v1h5v94h1V6h94V5H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+    }
+    .delete {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      color: red;
+    }
+
+    /* Popup dialog styles */
+    .popup-dialog {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #ffcccc;
+      padding: 20px;
+      border-radius: 5px;
+      display: none;
       z-index:9999
     }
   </style>
@@ -161,7 +289,16 @@
       <input type="number" id="dia" placeholder="Diastolic (dia)" style="display: none;">
       <input type="number" id="pulse" placeholder="Pulse" style="display: none;">
     </div>
-
+     <!-- Dashboard -->
+    <div id="dashboard">
+      <h2>Dashboard</h2>
+      <p>Systolic Average: <span id="sys-avg">-</span></p>
+      <p>Diastolic Average: <span id="dia-avg">-</span></p>
+      <p>Pulse Average: <span id="pulse-avg">-</span></p>
+      <p>Systolic Standard Deviation: <span id="sys-stddev">-</span></p>
+      <p>Diastolic Standard Deviation: <span id="dia-stddev">-</span></p>
+      <p>Pulse Standard Deviation: <span id="pulse-stddev">-</span></p>
+    </div>
     <!-- Popup dialog for high blood pressure -->
     <div id="highBPPopup" class="popup-dialog" style="display: none;">
       <h2>High Blood Pressure Alert!</h2>
@@ -189,6 +326,7 @@
 
   <!-- JavaScript code -->
   <script>
+    let readings = JSON.parse(localStorage.getItem('readings')) || [];
     const addReadingButton = document.getElementById('addReading');
     const userInfoDialog = document.getElementById('userInfoDialog');
     const nameInput = document.getElementById('name');
@@ -286,7 +424,7 @@
         timestamp: new Date().toLocaleString()
       };
 
-      let readings = JSON.parse(localStorage.getItem('readings')) || [];
+      
       readings.push(reading);
       localStorage.setItem('readings', JSON.stringify(readings));
 
@@ -350,7 +488,34 @@
       });
     }
 
-    displayReadings();
+   
+     // Calculate dashboard
+  function calculateDashboard() {
+    const sysValues = readings.map(reading => parseInt(reading.sys));
+    const diaValues = readings.map(reading => parseInt(reading.dia));
+    const pulseValues = readings.map(reading => parseInt(reading.pulse));
+
+    const sysAvg = sysValues.reduce((a, b) => a + b, 0) / sysValues.length;
+    const diaAvg = diaValues.reduce((a, b) => a + b, 0) / diaValues.length;
+    const pulseAvg = pulseValues.reduce((a, b) => a + b, 0) / pulseValues.length;
+
+    const sysStdDev = Math.sqrt(sysValues.map(value => Math.pow(value - sysAvg, 2)).reduce((a, b) => a + b, 0) / sysValues.length);
+    const diaStdDev = Math.sqrt(diaValues.map(value => Math.pow(value - diaAvg, 2)).reduce((a, b) => a + b, 0) / diaValues.length);
+    const pulseStdDev = Math.sqrt(pulseValues.map(value => Math.pow(value - pulseAvg, 2)).reduce((a, b) => a + b, 0) / pulseValues.length);
+
+    document.getElementById('sys-avg').textContent = sysAvg.toFixed(0);
+    document.getElementById('dia-avg').textContent = diaAvg.toFixed(0);
+    document.getElementById('pulse-avg').textContent = pulseAvg.toFixed(0);
+    document.getElementById('sys-stddev').textContent = sysStdDev.toFixed(0);
+    document.getElementById('dia-stddev').textContent = diaStdDev.toFixed(0);
+    document.getElementById('pulse-stddev').textContent = pulseStdDev.toFixed(0);
+    console.log(sysValues)
+  }
+
+  // Initialize
+     displayReadings();
+  calculateDashboard();
+
   </script>
 </body>
 </html>
