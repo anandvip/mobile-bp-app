@@ -348,6 +348,8 @@
     const doctorNameDisplay = document.getElementById('doctor-name');
     const doctorPhoneDisplay = document.getElementById('doctor-phone');
     const userSelection = document.getElementById('userSelection');
+    let highBPFlag = false;
+
 
     // Load user info from local storage
     let users = JSON.parse(localStorage.getItem('users')) || [];
@@ -408,10 +410,12 @@
         sysReading.textContent = sysInput.value;
         diaReading.textContent = diaInput.value;
         pulseReading.textContent = pulseInput.value;
+        
 
         const sysValue = parseInt(sysInput.value);
         if (sysValue > 140) {
-          highBPPopup.style.display = 'block';
+           highBPFlag = true;
+          // highBPPopup.style.display = 'block';
         }
       }
     });
@@ -429,13 +433,21 @@
       localStorage.setItem('readings', JSON.stringify(readings));
 
       displayReadings();
-      dialog.style.display = 'none';
-      sysInput.value = '';
+      dialog.style.display = 'none';//close the confirm dialog.
+      sysInput.value = '';//resetting the input fields ready for new reading.
       diaInput.value = '';
       pulseInput.value = '';
       diaInput.style.display = 'none';
       pulseInput.style.display = 'none';
       highBPPopup.style.display = 'none';
+      // Check for high blood pressure after the reading is confirmed
+  if (highBPFlag) {
+    highBPPopup.style.display = 'block';
+    setTimeout(() => {
+      highBPPopup.style.display = 'none';
+    }, 20000); // Close the popup after 20 seconds
+    highBPFlag = false; // Reset the flag
+  }
     });
 
     editButton.addEventListener('click', () => {
@@ -468,7 +480,7 @@
         let readingCard = document.createElement('div');
         readingCard.classList.add('card');
         readingCard.innerHTML = `
-        <p>Timestamp: <h4>${reading.timestamp}</h4></p>
+        <p>record-stamp: <h4>${reading.timestamp}</h4></p>
           <p>Systolic: ${reading.sys}</p>
           <p>Diastolic: ${reading.dia}</p>
           <p>Pulse: ${reading.pulse}</p>
